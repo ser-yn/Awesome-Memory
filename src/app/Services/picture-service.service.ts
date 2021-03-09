@@ -17,7 +17,7 @@ export interface PictureInterface{
 export class PictureServiceService {
   
   allImages: PictureInterface[] = [];
-  public apiUrl = "https://api.unsplash.com/photos/random?client_id=Zvx6-31Gj89VXNzswcRqYB-ab8Y7d9JE-Uhcvy6QAqs";
+  public apiUrl = "https://api.unsplash.com/photos/random?client_id=Zvx6-31Gj89VXNzswcRqYB-ab8Y7d9JE-Uhcvy6QAqs&orientation=squarish";
   public photos: any[];
 
   getPhoto(query: string, count: number){
@@ -41,7 +41,7 @@ export class PictureServiceService {
     let middleImage: PictureInterface;
     let random1: number;
     let random2: number;
-    for (let index = 0; index < this.allImages.length*5; index++) {
+    for (let index = 0; index < this.allImages.length*10; index++) {
         random1 = Math.floor(Math.random() * this.allImages.length);
         random2 = Math.floor(Math.random() * this.allImages.length);
         middleImage = this.allImages[random1];

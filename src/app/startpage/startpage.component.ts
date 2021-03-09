@@ -1,6 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { InfobarComponent } from '../infobar/infobar.component';
 import { PictureServiceService } from '../Services/picture-service.service';
 
 @Component({
@@ -12,11 +13,13 @@ export class StartpageComponent implements OnInit {
 
 
   categorys: string[] = ["Cats", "Dogs", "Ducks", "Fish", "Flowers", "Trees", "Space"];
-  cardAmount: number[] = [18, 24, 30, 36];
+  cardAmount: number[] = [20, 30, 40, 54];
 
   form: FormGroup;
 
-  constructor(private router:Router, private formBuilder:FormBuilder, private service:PictureServiceService) { 
+  constructor(private router:Router, 
+              private formBuilder:FormBuilder, 
+              private service:PictureServiceService,) { 
 
   }
 
@@ -28,7 +31,6 @@ export class StartpageComponent implements OnInit {
   }
 
   startGame() {
-    if(this.form){}
     this.service.getPhoto(this.form.value.categorysForm, this.form.value.amountsForm);
     this.router.navigate(['/game']);
   }
