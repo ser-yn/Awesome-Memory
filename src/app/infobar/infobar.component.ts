@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./infobar.component.css']
 })
 export class InfobarComponent implements OnInit {
-  @Input() category;
+  category;
+  amount;
 
   constructor(private router:Router) {
 

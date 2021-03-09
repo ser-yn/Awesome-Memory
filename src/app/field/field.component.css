@@ -1,1 +1,4 @@
-.internalMatGrid{ min-width: 630px;}
+.internalMatGrid{ 
+    border:1px double cyan; 
+    width: 100%;
+    height: 100%}

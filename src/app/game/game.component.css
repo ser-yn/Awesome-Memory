@@ -1,6 +1,14 @@
 .klasse {
   background-color: rgb(128, 128, 128);
-    border: 2px solid rgb(0, 0, 0);
-  }
+  border: 2px solid rgb(0, 0, 0);
+}
 
-  .internalMatGrid{  border:1px solid red; min-width:80%;}
+.internalMatGrid{ 
+  border:2px double rgb(0, 0, 0); 
+  width: 95%;
+  height: 93%}
+
+  .internalMatGridRes{ 
+    border:1px double rgb(0, 0, 0); 
+    width: 87%;
+    height: 93%}

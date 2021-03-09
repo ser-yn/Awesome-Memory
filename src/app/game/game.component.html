@@ -1,9 +1,9 @@
-<mat-grid-list cols="12" rowHeight="90px">
+<mat-grid-list cols="12" rowHeight="40:23">
     <mat-grid-tile
         [colspan]="12"
         [rowspan]="1">
     </mat-grid-tile>
-
+    
     <mat-grid-tile
         [colspan]="1"
         [rowspan]="7">
@@ -13,7 +13,7 @@
     [colspan]="7"
     [rowspan]="7"
     class="klasse">
-        <app-field></app-field>
+        <app-field class="internalMatGrid"></app-field>
     </mat-grid-tile>
     
     <mat-grid-tile
@@ -25,7 +25,29 @@
     [colspan]="2"
     [rowspan]="7"
     class="klasse">
-        <app-result></app-result>
+        <app-result class="internalMatGridRes"></app-result>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+        [colspan]="1"
+        [rowspan]="1">
+    </mat-grid-tile>
+
+    <mat-grid-tile
+        [colspan]="4"
+        [rowspan]="1">
+        <button mat-raised-button color="primary" (click)="shuffle()">Shuffle and Restart</button>
+    </mat-grid-tile>
+
+    <mat-grid-tile
+        [colspan]="1"
+        [rowspan]="1">
+    </mat-grid-tile>
+
+    <mat-grid-tile
+        [colspan]="4"
+        [rowspan]="1">
+        <button mat-raised-button color="primary" (click)="gotoStartpage()">Start new Game</button>
     </mat-grid-tile>
     
 </mat-grid-list>
