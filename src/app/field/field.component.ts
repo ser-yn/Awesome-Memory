@@ -17,4 +17,7 @@ export class FieldComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  imgClicked(open: boolean){
+    open = !open;
+  }
 }

@@ -5,7 +5,12 @@
   cols="5" 
   rowHeight="5:3.4">
     <mat-grid-tile *ngFor="let image of picServ.allImages">
-      <img src="{{image.url}}" alt="Card">;
+      <div *ngIf="image.open">
+        <img src="{{image.url}}" alt="Card" (click)="image.open=!image.open">;
+      </div>
+      <div *ngIf="!image.open">
+        <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/1107006/475259314.jpg" alt="Card" (click)="image.open=!image.open">;
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
@@ -13,7 +18,12 @@
 <div *ngIf="picServ.allImages.length===30">
   <mat-grid-list cols="6" rowHeight="6:4">
     <mat-grid-tile *ngFor="let image of picServ.allImages">
-      <img src="{{image.url}}" alt="Card">;
+      <div *ngIf="image.open">
+        <img src="{{image.url}}" alt="Card" (click)="imgClicked()">;
+      </div>
+      <div *ngIf="!image.open">
+        <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/1107006/475259314.jpg" alt="Card" (click)="imgClicked()">;
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
   </div>
@@ -21,7 +31,12 @@
 <div *ngIf="picServ.allImages.length===40">
   <mat-grid-list cols="8" rowHeight="8:7">
     <mat-grid-tile *ngFor="let image of picServ.allImages">
-      <img src="{{image.url}}" alt="Card">;
+      <div *ngIf="image.open">
+        <img src="{{image.url}}" alt="Card" (click)="imgClicked()">;
+      </div>
+      <div *ngIf="!image.open">
+        <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/1107006/475259314.jpg" alt="Card" (click)="imgClicked()">;
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
   </div>
@@ -29,7 +44,12 @@
   <div *ngIf="picServ.allImages.length===54">
     <mat-grid-list cols="9" rowHeight="9:7.5">
       <mat-grid-tile *ngFor="let image of picServ.allImages">
-        <img src="{{image.url}}" alt="Card">;
+        <div *ngIf="image.open">
+          <img src="{{image.url}}" alt="Card" (click)="imgClicked()">;
+        </div>
+        <div *ngIf="!image.open">
+          <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/1107006/475259314.jpg" alt="Card" (click)="imgClicked()">;
+        </div>
       </mat-grid-tile>
     </mat-grid-list>
     </div>

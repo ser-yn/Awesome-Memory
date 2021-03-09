@@ -25,6 +25,9 @@ export class GameComponent implements OnInit {
         this.picServ.allImages[random1]=this.picServ.allImages[random2];
         this.picServ.allImages[random2]=middleImage;
     }
+    for (let index = 0; index < this.picServ.allImages.length; index++) {
+      this.picServ.allImages[index].open = false;      
+    }
     console.log(this.picServ.allImages);
     
 }
