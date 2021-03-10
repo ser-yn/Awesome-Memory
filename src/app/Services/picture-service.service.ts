@@ -16,14 +16,16 @@ export class PictureServiceService {
   // Category und Amount werden über den Event Emitter an Infobar weitergegeben
   emitCategory: EventEmitter<string> = new EventEmitter<string>();
   emitAmount: EventEmitter<number> = new EventEmitter<number>();
+
   // Wird an das Feld weitergegeben, damit dieses weiß das die Bilder im Array sind
   // aufgrund der Asynchronität wird ansonsten vermutlich mit einem leeren Array gearbeitet
   emitImagesReceived: EventEmitter<void> = new EventEmitter<void>();
+
   // Array der Bilder, durch das Interface wird definiert, 
   // wie die Elementobjekte aufgebaut sein müssen
   allImages: PictureInterface[] = [];
+  
   public apiUrl = "https://api.unsplash.com/photos/random?client_id=Zvx6-31Gj89VXNzswcRqYB-ab8Y7d9JE-Uhcvy6QAqs";
-  public photos: any[];
 
   getPhoto(query: string, count: number){
     

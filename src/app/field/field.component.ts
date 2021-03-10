@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PictureServiceService } from '../Services/picture-service.service';
+import { PictureInterface, PictureServiceService } from '../Services/picture-service.service';
 
 @Component({
   selector: 'app-field',
@@ -13,6 +13,10 @@ export class FieldComponent implements OnInit {
   colAmount: number;
   rowVerhaelt: string;
   clickCount: number = 2;
+  i1: number;
+  i2: number;
+  cardsToBeclosed: boolean;
+  boolCounter: number;
 
 constructor(private picServ:PictureServiceService, 
             private router:Router) { 
@@ -66,15 +70,23 @@ getPics(){
 imgClicked(info){
   // Es sind zwei Clicks möglich, beim zweiten click wird die EndFct aufgerufen,
   // in der gecheckt wird ob der Zug ein Erfolg war etc. s.u.
-    console.log(info);
     switch (this.clickCount) {
       case 2:
+        if(this.cardsToBeclosed){
+          this.picServ.allImages[this.i1].open = false;
+          this.picServ.allImages[this.i2].open = false;
+          this.cardsToBeclosed=false;
+        }
         this.clickCount--;
-        return true;
+        this.i2 = info;
+        this.picServ.allImages[info].open = true;
+        break;
       case 1:
         this.clickCount=2;
-        this.endFct();
-        return true;
+        this.i1 = info;
+        this.picServ.allImages[info].open = true;
+        this.endFct(this.i1, this.i2);
+        break;
     
       default:
         this.clickCount=2;
@@ -82,8 +94,26 @@ imgClicked(info){
   }
 }
 
-  endFct(){
-    
+  endFct(i1, i2){
+    // Wenn die Karten übereinstimmen bleiben sie offen und der Spieler bekommt einen Punkt
+    // Ansonsten werden sie geschlossen, keine Punkteverteilung
+    if(this.picServ.allImages[i1].id === this.picServ.allImages[i2].id){
+        // punkte zählen
+    }
+    else {
+      this.cardsToBeclosed=true;
+    }
+
+    // Checken ob alle Karten offen sind, wenn ja ist das Spiel vorbei
+    this.checkEnd()
   }
 
+checkEnd(){
+  const cardsLeft = this.picServ.allImages.find((picture: PictureInterface) => picture.open === false);
+  if(!cardsLeft){
+
+  }
 }
+
+}
+

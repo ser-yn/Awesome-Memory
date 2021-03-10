@@ -6,14 +6,14 @@
   <mat-grid-list 
   [cols]="colAmount" 
   [rowHeight]="rowVerhaelt">
-    <mat-grid-tile *ngFor="let image of getPics(); let i = index">
+    <mat-grid-tile *ngFor="let image of getPics()">
       <div *ngIf="image.open">
         <img src="{{image.url}}" alt="Card">;
       </div>
       <div *ngIf="!image.open">
         <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/1107006/475259314.jpg" 
         alt="Closed Card"
-        (click)="image.open=imgClicked(i)">;
+        (click)="imgClicked(getPics().indexOf(image))">;
       </div>
     </mat-grid-tile>
   </mat-grid-list>
