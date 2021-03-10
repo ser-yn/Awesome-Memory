@@ -2,6 +2,7 @@ import { Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PictureServiceService } from '../Services/picture-service.service';
+import { ResultsService } from '../Services/results.service';
 
 @Component({
   selector: 'app-startpage',
@@ -20,7 +21,8 @@ export class StartpageComponent implements OnInit {
 
   constructor(private router:Router, 
               private formBuilder:FormBuilder, 
-              private service:PictureServiceService,) { 
+              private picService:PictureServiceService,
+              private resService:ResultsService) { 
 
   }
 
@@ -31,9 +33,13 @@ export class StartpageComponent implements OnInit {
     })
   }
 
-  startGame() {
-    this.service.getPhoto(this.form.value.categorysForm, this.form.value.amountsForm);
+startGame() {
+    this.picService.getPhoto(this.form.value.categorysForm, this.form.value.amountsForm);
     this.router.navigate(['/game']);
-  }
+}
 
+// Je nachdem welcher Button gedrückt wird, dieser modus wird an resultsService weitergegeben
+onModeClick(mode: string){
+  this.resService.determineMode(mode);
+}
 }

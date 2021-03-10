@@ -1,5 +1,19 @@
 <mat-grid-list cols="1" rowHeight="20:13">
-    <mat-grid-tile>Timer: {{numberMinutes}}:{{numberSeconds}}</mat-grid-tile>
-    <mat-grid-tile>Points</mat-grid-tile>    
-    <mat-grid-tile>Points</mat-grid-tile>    
+    <mat-grid-tile>Timer: {{numberMinutes | number:'2.0-0' }}:{{numberSeconds | number:'2.0-0' }}</mat-grid-tile>
+    <mat-grid-tile  
+    [style.color] = "getPlayEinsActive() ? 'red' : 'black'"
+        >Points: {{getPEins() | number:'2.0-0' }}
+    </mat-grid-tile>    
+    <mat-grid-tile 
+    [style.color] = "getPlayZweiActive() ? 'red' : 'black'"
+    *ngIf="getPZwei()>=0"
+        >Points: {{getPZwei() | number:'2.0-0' }}
+    </mat-grid-tile>    
 </mat-grid-list>
+<!-- 
+    der Timer wird immer gezeigt und läuft hoch,
+    die ersten punkte werden ebenfalls immer gezeigt,
+    die zweiten punkte werden nur gezeigt wenn die variable im resServ >=0 ist
+    wird nur der singleplayer gewählt, wird die variable ins negative gestzt
+ -->
+

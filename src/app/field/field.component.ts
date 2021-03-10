@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PictureInterface, PictureServiceService } from '../Services/picture-service.service';
+import { ResultsService } from '../Services/results.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-field',
@@ -19,7 +21,9 @@ export class FieldComponent implements OnInit {
   boolCounter: number;
 
 constructor(private picServ:PictureServiceService, 
-            private router:Router) { 
+            private router:Router,
+            private resServ: ResultsService,
+            private mySnackBar: MatSnackBar) { 
             
 }
 
@@ -97,11 +101,15 @@ imgClicked(info){
   endFct(i1, i2){
     // Wenn die Karten übereinstimmen bleiben sie offen und der Spieler bekommt einen Punkt
     // Ansonsten werden sie geschlossen, keine Punkteverteilung
+
+    // Ist das Paar richtig, werden die punkte des aktiven spieler inkrementiert
+    // ist es falsch wird der aktive spieler gewechselt
     if(this.picServ.allImages[i1].id === this.picServ.allImages[i2].id){
-        // punkte zählen
+        this.resServ.increPoints();
     }
     else {
       this.cardsToBeclosed=true;
+      this.resServ.changeActivePlayer();
     }
 
     // Checken ob alle Karten offen sind, wenn ja ist das Spiel vorbei
@@ -111,7 +119,9 @@ imgClicked(info){
 checkEnd(){
   const cardsLeft = this.picServ.allImages.find((picture: PictureInterface) => picture.open === false);
   if(!cardsLeft){
-
+    this.mySnackBar.open(this.resServ.getWinner(), '',{
+      duration: 5000,
+    });
   }
 }
 

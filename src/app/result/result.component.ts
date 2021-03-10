@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResultsService } from '../Services/results.service';
 
 @Component({
   selector: 'app-result',
@@ -12,7 +13,22 @@ export class ResultComponent implements OnInit {
   pointsPlayerOne = 0;
   pointsPlayerTwo = 0;
 
-  constructor() { }
+  constructor(private resServ:ResultsService) {
+    
+   }
+// Zugriff auf PEins und PZwei von der Html, ohne resServ public zu machen
+   getPEins(){
+     return this.resServ.punktePEins;
+   }
+   getPZwei(){
+    return this.resServ.punktePZwei;
+  }
+  getPlayEinsActive(){
+    return this.resServ.playerOne;
+  }
+  getPlayZweiActive(){
+    return this.resServ.playerTwo;
+  }
 
   ngOnInit(): void {
     // vorgefertigte Methode die jede Sekunde einen counter nach oben zählt

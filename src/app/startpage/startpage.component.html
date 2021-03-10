@@ -24,13 +24,21 @@
     <mat-grid-tile
     [colspan]="5"
     [rowspan]="2">
-    <button type="button" mat-flat-button>Single Player</button>
+    <button 
+    (click)="onModeClick('SP')"
+    type="button" 
+    mat-flat-button
+     >Single Player</button>
   </mat-grid-tile>
 
   <mat-grid-tile
   [colspan]="5"
     [rowspan]="2">
-    <button type="button" mat-flat-button>Two Players</button>
+    <button 
+    (click)="onModeClick('TP')"
+    type="button" 
+    mat-flat-button
+      >Two Players</button>
   </mat-grid-tile>
 
   <mat-grid-tile
@@ -49,7 +57,11 @@
   <mat-grid-tile
   [colspan]="5"
     [rowspan]="2">
-    <button type="button" mat-flat-button>Against Computer</button>
+    <button 
+    (click)="onModeClick('CP')"
+    type="button" 
+    mat-flat-button
+      >Against Computer</button>
   </mat-grid-tile>
 
   <mat-grid-tile 
