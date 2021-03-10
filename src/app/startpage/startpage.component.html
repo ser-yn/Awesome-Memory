@@ -12,7 +12,9 @@
   [rowspan]="3">
     <mat-form-field appearance="fill">
         <mat-label>Category</mat-label>
-        <mat-select formControlName="categorysForm">
+        <mat-select 
+        formControlName="categorysForm"
+        required>
         <mat-option *ngFor="let category of categorys" [value]="category">{{category}}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -36,7 +38,9 @@
   [rowspan]="3">
     <mat-form-field appearance="fill">
         <mat-label>Amount of Cards</mat-label>
-        <mat-select formControlName="amountsForm">
+        <mat-select 
+        formControlName="amountsForm"
+        required>
         <mat-option *ngFor="let amount of cardAmount" [value]="amount">{{amount}}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -54,6 +58,7 @@
     <button type="submit"
     mat-stroked-button color="accent" 
     color='primary'
+    [disabled]="form.invalid"
       >Start the Game
   </button>
   </mat-grid-tile>

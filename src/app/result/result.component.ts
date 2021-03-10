@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as EventEmitter from 'events';
 
 @Component({
   selector: 'app-result',
@@ -16,6 +15,8 @@ export class ResultComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // vorgefertigte Methode die jede Sekunde einen counter nach oben zählt
+    // If-Anweisung um in Minuten anzuzeigen, nicht nur in Sekunden
     this.timer = setInterval(() => {
       this.numberSeconds++;
       if(this.numberSeconds > 59){

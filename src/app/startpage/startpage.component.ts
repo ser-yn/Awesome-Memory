@@ -1,7 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { InfobarComponent } from '../infobar/infobar.component';
 import { PictureServiceService } from '../Services/picture-service.service';
 
 @Component({
@@ -11,8 +10,10 @@ import { PictureServiceService } from '../Services/picture-service.service';
 })
 export class StartpageComponent implements OnInit {
 
-
-  categorys: string[] = ["Cats", "Dogs", "Ducks", "Fish", "Flowers", "Trees", "Space"];
+  // Arrays aus denen die Kategorie und die Kartenanzahl auszuwählen sind
+  categorys: string[] = ["Cats", "Dogs", "Ducks", "Fish", "Flowers", "Trees"];
+  // ACHTUNG!!! cardAmount mit diesen Werten in ImageReceived von FieldComponent Hardgecoded
+  // Bei Änderungen muss dies beachtet werden
   cardAmount: number[] = [20, 30, 40, 54];
 
   form: FormGroup;

@@ -6,9 +6,11 @@
 .internalMatGrid{ 
   border:2px double rgb(0, 0, 0); 
   width: 95%;
-  height: 93%}
+  height: 93%
+}
 
-  .internalMatGridRes{ 
-    border:1px double rgb(0, 0, 0); 
-    width: 87%;
-    height: 93%}
+.internalMatGridRes{ 
+  border:1px double rgb(0, 0, 0); 
+  width: 87%;
+  height: 93%
+}

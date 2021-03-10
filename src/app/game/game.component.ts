@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PictureInterface, PictureServiceService } from '../Services/picture-service.service';
+import { PictureServiceService } from '../Services/picture-service.service';
 
 @Component({
   selector: 'app-game',
@@ -11,35 +11,31 @@ export class GameComponent implements OnInit {
   
   
 
-  constructor(private picServ:PictureServiceService, 
-              private router:Router) { }
+constructor(private picServ:PictureServiceService, 
+            private router:Router) {
 
-  shuffle(){
-    let middleImage: PictureInterface;
-    let random1: number;
-    let random2: number;
-    for (let index = 0; index < this.picServ.allImages.length*10; index++) {
-        random1 = Math.floor(Math.random() * this.picServ.allImages.length);
-        random2 = Math.floor(Math.random() * this.picServ.allImages.length);
-        middleImage = this.picServ.allImages[random1];
-        this.picServ.allImages[random1]=this.picServ.allImages[random2];
-        this.picServ.allImages[random2]=middleImage;
-    }
-    for (let index = 0; index < this.picServ.allImages.length; index++) {
-      this.picServ.allImages[index].open = false;      
-    }
-    console.log(this.picServ.allImages);
-    
+}
+
+shuffle(){
+  // es wird einfach die sshuffle Methode im Picture Service aufgerufen
+  // einfacher, da diese schon definiert ist
+    this.picServ.shuffle();
 }
 
 empty(array: any[]){
+  // Leeren des Arrays
+  // löschen der einzelnen Elemente
   for (let index = 0; index < array.length; index++) {
     delete array[index];
   }
+  // Dadurch werden die Pointer auf die gelöschten Elemente gelöscht
   array.length = 0;
 }
 
 gotoStartpage(){
+  // Redirected auf die Startpage, ruft davor jedoch die empty Funktion auf
+  // ansonsten wird beim Starten eines neuen Spiels die neuen Bilder an
+  // das noch bestehende Array angehängt
   this.router.navigate(['']);
   this.empty(this.picServ.allImages);
 }

@@ -1,7 +1,6 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StartpageComponent } from '../startpage/startpage.component';
+import { PictureServiceService } from '../Services/picture-service.service';
 
 @Component({
   selector: 'app-infobar',
@@ -12,18 +11,24 @@ export class InfobarComponent implements OnInit {
   category;
   amount;
 
-  constructor(private router:Router) {
+  constructor(private router:Router, private picServ: PictureServiceService) {
    }
 
   ngOnInit(): void {
+    // sobal Category und Amount im Picture Service zur Verfügung stehen werden sie 
+    // hier eingetragen, dies wird anschließend in der html dargestellt
+    this.picServ.emitCategory.subscribe(emittedCat=>{
+      this.category = emittedCat;
+    });
+    this.picServ.emitAmount.subscribe(emittedAmo=>{
+      this.amount = emittedAmo;
+    });
+
   }
 
   gotoStartpage(){
+    // Click Event auf den AM-Button redirected mithilfe des Routers zu Starpage
     this.router.navigate(['']);
   }
 
-  show(cat: string, amo: number) {  
-    this.category = cat;
-    this.amount = amo;
-  }
 }
