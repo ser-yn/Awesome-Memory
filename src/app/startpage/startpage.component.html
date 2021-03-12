@@ -20,26 +20,23 @@
     </mat-form-field>
     
   </mat-grid-tile>
-  [rowspan]="6">
-    <mat-grid-tile
-    [colspan]="5"
-    [rowspan]="2">
-    <button 
-    (click)="onModeClick('SP')"
-    type="button" 
-    mat-flat-button
-     >Single Player</button>
-  </mat-grid-tile>
-
+    
   <mat-grid-tile
   [colspan]="5"
-    [rowspan]="2">
-    <button 
-    (click)="onModeClick('TP')"
-    type="button" 
-    mat-flat-button
-      >Two Players</button>
+  [rowspan]="3">
+    <mat-form-field appearance="fill">
+      <mat-label>gamemode</mat-label>
+      <mat-select
+      formControlName="gamemodeForm"
+      required>
+        <mat-option *ngFor="let gamemode of ['Single Player', 'Two Players', 'Against Computer']"
+        [value]="gamemode">{{gamemode}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </mat-grid-tile>
+
+
 
   <mat-grid-tile
   [colspan]="5"
@@ -56,12 +53,11 @@
 
   <mat-grid-tile
   [colspan]="5"
-    [rowspan]="2">
-    <button 
-    (click)="onModeClick('CP')"
-    type="button" 
-    mat-flat-button
-      >Against Computer</button>
+  [rowspan]="3">
+  <div
+  [style.color] = "'white'">
+    Difficulty</div>
+    <mat-slider></mat-slider>
   </mat-grid-tile>
 
   <mat-grid-tile 

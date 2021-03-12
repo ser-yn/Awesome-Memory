@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
+import { imageProperties } from '../enemy/enemy.component';
 
 
 export interface PictureInterface{
@@ -16,6 +17,7 @@ export class PictureServiceService {
   // Category und Amount werden über den Event Emitter an Infobar weitergegeben
   emitCategory: EventEmitter<string> = new EventEmitter<string>();
   emitAmount: EventEmitter<number> = new EventEmitter<number>();
+  emitMode: EventEmitter<string> = new EventEmitter<string>();
 
   // Wird an das Feld weitergegeben, damit dieses weiß das die Bilder im Array sind
   // aufgrund der Asynchronität wird ansonsten vermutlich mit einem leeren Array gearbeitet
@@ -27,7 +29,7 @@ export class PictureServiceService {
   
   public apiUrl = "https://api.unsplash.com/photos/random?client_id=Zvx6-31Gj89VXNzswcRqYB-ab8Y7d9JE-Uhcvy6QAqs";
 
-  getPhoto(query: string, count: number){
+  getPhoto(query: string, count: number, mode: string){
     
     count = count/2;
     const queryUrl = `&query=${query}`;
@@ -43,6 +45,7 @@ export class PictureServiceService {
     })
     this.emitCategory.emit(query);
     this.emitAmount.emit(count*2);
+    this.emitMode.emit(mode);
   }
 
 
@@ -66,6 +69,36 @@ export class PictureServiceService {
     for (let index = 0; index < this.allImages.length; index++) {
       this.allImages[index].open = false;  
     }
+  }
+
+  openCard(){
+    let placeNumber: number;
+    let check: boolean = true;
+    
+    // die schleife läuft solange bis check auf false gesetzt wird
+    // die place number wird auf ein random nummer im array gesetzt
+    // nun wir gecheckt ob diese schon offen (offene Paare) ist, ist sie es nicht bleibt check true und die schleife beginnt von neuem
+    // ist sie geschlossen geht check auf false, die schleife wird verlassen und die karte wird geöffnet
+    while(check){
+      placeNumber= Math.floor(Math.random()*this.allImages.length);
+      if(this.allImages[placeNumber].open === false){
+        check = false;
+    }
+  }
+    this.allImages[placeNumber].open = true;
+    // hier werden die daten der geöffneten karte zurückgegebn, damit sie in der enemy component gespeichert werden kann
+    return {placeNumber: placeNumber, imageUrl: this.allImages[placeNumber].url};
+  }
+
+
+  openCardKnown(placeNumberOne: number, placeNumberTwo: number){
+    this.allImages[placeNumberOne].open = true;
+    this.allImages[placeNumberTwo].open = true;
+  }
+
+  closeCards(placeNumberOne: number, placeNumberTwo: number){
+    this.allImages[placeNumberOne].open = false;
+    this.allImages[placeNumberTwo].open = false;
   }
 
   constructor(private httpClient: HttpClient) { 

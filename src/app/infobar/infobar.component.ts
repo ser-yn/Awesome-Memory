@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PictureServiceService } from '../Services/picture-service.service';
+import { ResultsService } from '../Services/results.service';
 
 @Component({
   selector: 'app-infobar',
@@ -10,8 +11,10 @@ import { PictureServiceService } from '../Services/picture-service.service';
 export class InfobarComponent implements OnInit {
   category;
   amount;
+  gamemode;
 
-  constructor(private router:Router, private picServ: PictureServiceService) {
+  constructor(private router:Router, 
+              private picServ: PictureServiceService) {
    }
 
   ngOnInit(): void {
@@ -22,6 +25,9 @@ export class InfobarComponent implements OnInit {
     });
     this.picServ.emitAmount.subscribe(emittedAmo=>{
       this.amount = emittedAmo;
+    });
+    this.picServ.emitMode.subscribe(emittedMode=>{
+      this.gamemode = emittedMode;
     });
 
   }

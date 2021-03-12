@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { PictureInterface, PictureServiceService } from '../Services/picture-service.service';
 import { ResultsService } from '../Services/results.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EnemyLogicService } from '../Services/enemy-logic.service';
 
 @Component({
   selector: 'app-field',
@@ -15,14 +16,15 @@ export class FieldComponent implements OnInit {
   colAmount: number;
   rowVerhaelt: string;
   clickCount: number = 2;
-  i1: number;
-  i2: number;
+  placeNum1: number;
+  placeNum2: number;
   cardsToBeclosed: boolean;
   boolCounter: number;
 
 constructor(private picServ:PictureServiceService, 
-            private router:Router,
+            private logicServe: EnemyLogicService,
             private resServ: ResultsService,
+            private router:Router,
             private mySnackBar: MatSnackBar) { 
             
 }
@@ -72,43 +74,57 @@ getPics(){
 }
 
 imgClicked(info){
+  // zuerst wird gecheckt ob der computergegner am zug ist
+  if(this.resServ.checkComputerenemyTurn())
+    return;
+
   // Es sind zwei Clicks möglich, beim zweiten click wird die EndFct aufgerufen,
   // in der gecheckt wird ob der Zug ein Erfolg war etc. s.u.
     switch (this.clickCount) {
       case 2:
-        if(this.cardsToBeclosed){
-          this.picServ.allImages[this.i1].open = false;
-          this.picServ.allImages[this.i2].open = false;
+        if(this.cardsToBeclosed && this.logicServe.gamemode !== 'Against Computer'){
+          this.picServ.closeCards(this.placeNum1, this.placeNum2);
           this.cardsToBeclosed=false;
         }
         this.clickCount--;
-        this.i2 = info;
+        this.placeNum2 = info;
         this.picServ.allImages[info].open = true;
+        this.logicServe.getImageProps(this.placeNum2, this.picServ.allImages[this.placeNum2].url);
         break;
       case 1:
         this.clickCount=2;
-        this.i1 = info;
+        this.placeNum1 = info;
         this.picServ.allImages[info].open = true;
-        this.endFct(this.i1, this.i2);
+        this.logicServe.getImageProps(this.placeNum1, this.picServ.allImages[this.placeNum1].url);
+        this.endFct(this.placeNum1, this.placeNum2);
         break;
     
       default:
         this.clickCount=2;
         break;
   }
+  
 }
 
-  endFct(i1, i2){
+  endFct(endFctPlaceNum1, endFctPlaceNum2){
     // Wenn die Karten übereinstimmen bleiben sie offen und der Spieler bekommt einen Punkt
     // Ansonsten werden sie geschlossen, keine Punkteverteilung
 
     // Ist das Paar richtig, werden die punkte des aktiven spieler inkrementiert
     // ist es falsch wird der aktive spieler gewechselt
-    if(this.picServ.allImages[i1].id === this.picServ.allImages[i2].id){
-        this.resServ.increPoints();
+    if(this.picServ.allImages[endFctPlaceNum1].id === this.picServ.allImages[endFctPlaceNum2].id){
+        this.resServ.incrementPoints();
     }
     else {
       this.cardsToBeclosed=true;
+      // Wenn es gegen den computer geht werden die karten nicht erst beim nächsten klick geschlossen, sondern direkt
+      // ein kleiner puffer von 5 sekunden oder ähnliches wird eingebaut
+      if(this.logicServe.gamemode === 'Against Computer'){
+        setTimeout(() => {
+          this.picServ.closeCards(this.placeNum1, this.placeNum2);
+        }, 2500);
+        this.cardsToBeclosed=false;
+      }
       this.resServ.changeActivePlayer();
     }
 

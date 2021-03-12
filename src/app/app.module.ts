@@ -11,7 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { HttpClientModule } from '@angular/common/http';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { AppComponent } from './app.component';
 import { InfobarComponent } from './infobar/infobar.component';
@@ -19,6 +20,7 @@ import { FieldComponent } from './field/field.component';
 import { ResultComponent } from './result/result.component';
 import { StartpageComponent } from './startpage/startpage.component';
 import { GameComponent } from './game/game.component';
+import { EnemyComponent } from './enemy/enemy.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { GameComponent } from './game/game.component';
     ResultComponent,
     StartpageComponent,
     GameComponent,
+    EnemyComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,8 @@ import { GameComponent } from './game/game.component';
     MatButtonModule,
     MatGridListModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
